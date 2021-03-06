@@ -11,6 +11,8 @@
     <link href="/css/app.css" rel="stylesheet">
     <script src="/js/board.js"></script>
     <script src="https://kit.fontawesome.com/3d828ebbb1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app" class="app">
@@ -18,7 +20,6 @@
             <h1>Simple Board</h1>
         </header>
         <?php require __DIR__ . "/{$_content_path}.php";?>
-        <footer>footer</footer>
     </div>
 </body>
 </html>

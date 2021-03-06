@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use \App\Model\Board;
+use SimpleBoardApp\libraries\Request;
 
 class BoardController
 {
@@ -13,6 +14,7 @@ class BoardController
     }
 
     public function index() {
+        print_r(Request::get());
         echo json_encode($this->board->getAll());
     }
 
