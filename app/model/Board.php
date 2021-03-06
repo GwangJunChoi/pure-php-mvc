@@ -15,7 +15,7 @@ class Board extends Model
         return $this->query($query)->getRows();
     }
 
-    public function register($id) {
+    public function create($id) {
         return $this->insert();
     }
 
@@ -24,8 +24,9 @@ class Board extends Model
         return $this->query($query , [$id])->getRow();
     }
 
-    public function delete() {
-        return $this->delete();
+    public function remove($id) {
+        $query = "UPDATE simplae_board SET is_deleted = 1  WHERE id = ?";
+        return $this->update($query, [$id]);
     }
 
 

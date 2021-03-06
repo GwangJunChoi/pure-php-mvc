@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use \App\Model\Board;
-use SimpleBoardApp\libraries\Request;
 
 class BoardController
 {
@@ -18,19 +17,15 @@ class BoardController
     }
 
     public function register() {
-        //ajax register
-
         echo json_encode($this->board->create());
     }
 
     public function getBoard($id) {
-        print_r(Request::class);
-        print_r($id);
-        echo 'view';
+        echo json_encode($this->board->getBoard($id));
     }
 
-    public function delete($id) {
-        echo 'delete';
+    public function remove($id) {
+        echo json_encode($this->board->remove($id));
     }
 
     public function update($id) {
