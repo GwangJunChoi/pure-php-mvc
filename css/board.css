@@ -24,6 +24,13 @@ main {
 .board-item {
     padding: 8px;
 }
+.board-item .item-header {
+    font-weight: 900;
+    text-align: left;
+    font-size: 17px;
+    padding: 10px;
+    cursor: pointer;
+}
 .board-item .item-content p{
     text-align: left;
     white-space: nowrap;
@@ -36,6 +43,20 @@ main {
 }
 .board-item .item-remove {
     padding: 0;
+}
+.board-pagnation {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+.board-pagnation div {
+    cursor: pointer;
+}
+.board-pagnation div.active {
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 
@@ -106,4 +127,10 @@ main {
     color: #fff;
     bottom: 0;
     right: 0;
+}
+.btn.remove-board {
+    background: linear-gradient(90deg, #fb6487, #8763fb);
+}
+.btn.form-submit {
+    background: linear-gradient(90deg, #f264fb, #8763fb);
 }

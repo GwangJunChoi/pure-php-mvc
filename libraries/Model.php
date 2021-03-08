@@ -17,23 +17,61 @@ class Model
     }
 
     public function __destruct() {
-        //$db = null;
+        $this->db = null;
     }
 
     private function executeQuery($query, $args = []) {
         $this->result = $this->db->prepare($query);
-        return $this->result->execute($args);
+        $this->result->execute($args);
+        return $this->result->rowCount();
     }
 
-    public function insert($query, $args = []) {
+    public function insert($table, $object) {
+        $args = [];
+        $column = [];
+        $query = "INSERT INTO {$table} SET ";
+        foreach ($object as $col => $data) {
+            $column[] = "`{$col}` = ?";
+            $args[] = $data;
+
+        }
+        $query .= implode(', ', $column);
         return $this->executeQuery($query, $args);
     }
 
-    public function delete($query, $args = []) {
+    public function delete($table, $condition = []) {
+        if (count($condition) === 0) {
+            return false;
+        }
+        $args = [];
+        $where = [];
+        $query = "DELETE FROM {$table} WHERE ";
+        foreach ($condition as $col => $data) {
+            $where[] = "`{$col}` = ?";
+            $args[] = $data;
+        }
+        $query .= implode(', ', $where);
         return $this->executeQuery($query, $args);
     }
 
-    public function update($query, $args = []) {
+    public function update($table, $object, $condition = []) {
+        if (count($condition) === 0) {
+            return false;
+        }
+        $args = [];
+        $column = [];
+        $where = [];
+        $query = "UPDATE {$table} SET ";
+        foreach ($object as $col => $data) {
+            $column[] = "`{$col}` = ?";
+            $args[] = $data;
+        }
+        foreach ($condition as $col => $data) {
+            $where[] = "`{$col}` = ?";
+            $args[] = $data;
+        }
+        $query .= implode(', ', $column);
+        $query .= " WHERE " . implode(' and ', $where);
         return $this->executeQuery($query, $args);
     }
 

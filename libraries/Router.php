@@ -50,8 +50,11 @@ class Router
         $this->addRoutes('PATCH', $uri, $callback);
     }
 
-    private function getMatchedUri($routerUri) {
+    public function put($uri, $callback) {
+        $this->addRoutes('PUT', $uri, $callback);
+    }
 
+    private function getMatchedUri($routerUri) {
         $routerUri = '^' . $routerUri . '$';
         if (preg_match('#' . $routerUri . '#', $this->currentPath, $matches)) {
             array_shift($matches);

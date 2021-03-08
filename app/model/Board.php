@@ -10,24 +10,43 @@ class Board extends Model
         parent::__construct();
     }
 
-    public function getAll() {
-        $query = "SELECT * FROM simplae_board WHERE is_deleted = 0";
+    public function getCount() {
+        $query = "SELECT count(*) as total FROM simplae_board WHERE is_deleted = 0";
+        return $this->query($query)->getRow()->total;
+    }
+
+    public function getBoards($page) {
+        $offset = intval($page['offset']);
+        $limit = intval($page['limit']);
+        $query = "SELECT title, author, content, inserted_at
+                    FROM simplae_board 
+                    WHERE is_deleted = 0 ORDER BY id DESC LIMIT {$offset}, {$limit}";
         return $this->query($query)->getRows();
     }
 
-    public function create($id) {
-        return $this->insert();
+    public function create($board) {
+        return $this->insert("simplae_board" , $board);
     }
 
     public function getBoard($id) {
-        $query = "SELECT * FROM simplae_board WHERE is_deleted = 0 and id = ?";
-        return $this->query($query , [$id])->getRow();
+        $query = "SELECT title, author, content, inserted_at FROM simplae_board WHERE is_deleted = 0 and id = ?";
+        return parent::query($query , [$id])->getRow();
     }
 
-    public function remove($id) {
-        $query = "UPDATE simplae_board SET is_deleted = 1  WHERE id = ?";
-        return $this->update($query, [$id]);
+    public function remove($id, $password) {
+        $update = ['is_deleted' => 1];
+        $condition = [
+            'id' => $id,
+            'password' => $password
+        ];
+        return parent::update('simplae_board', $update, $condition);
     }
 
-
+    public function update($board, $id) {
+        $condition = [
+            'id' => $id,
+            'password' => $board['password']
+        ];
+        return parent::update('simplae_board', $board, $condition);
+    }
 }
