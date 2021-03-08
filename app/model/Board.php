@@ -34,7 +34,10 @@ class Board extends Model
     }
 
     public function remove($id, $password) {
-        $update = ['is_deleted' => 1];
+        $update = [
+            'is_deleted' => 1,
+            'deleted_at' => date('Y-m-d H:i:s'),
+        ];
         $condition = [
             'id' => $id,
             'password' => $password

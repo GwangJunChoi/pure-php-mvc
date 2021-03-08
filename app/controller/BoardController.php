@@ -94,7 +94,7 @@ class BoardController
             'title' => Request::post('title'),
             'author' => Request::post('author'),
             'password' => Request::post('password'),
-            'content' => Request::post('content')
+            'content' => Request::post('content'),
         ];
 
         $result = $this->board->update($board, $id);
