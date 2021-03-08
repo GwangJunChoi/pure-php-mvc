@@ -47,9 +47,10 @@ class BoardController
             'password' => Request::post('password'),
             'content' => Request::post('content')
         ];
+        $reulst = $this->board->create($board);
         echo json_encode([
-            'result' => $this->board->create($board),
-            'msg'    => '저장!',
+            'result' => $reulst,
+            'msg'    => ($reulst) ? 'success :)' : 'failed',
         ]);
     }
 
@@ -71,7 +72,7 @@ class BoardController
         $result = $this->board->remove($id, Request::post('password'));
         echo json_encode([
             'result' => $result,
-            'msg'    => ($result) ? 'success' : 'failed'
+            'msg'    => ($result) ? 'success :)' : 'failed'
         ]);
     }
 
@@ -99,7 +100,7 @@ class BoardController
         $result = $this->board->update($board, $id);
         echo json_encode([
             'result' => $result,
-            'msg'    => ($result) ? '저장' : '실패',
+            'msg'    => ($result) ? 'success :)' : 'failed',
         ]);
     }
 }

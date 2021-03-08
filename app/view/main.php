@@ -1,14 +1,7 @@
 <main>
     <div class="board-wrapper">
         <ul class="board-list"></ul>
-        <nav class="board-pagnation">
-            <div><i class="fas fa-long-arrow-alt-left"></i></div>
-            <div>1</div>
-            <div class="active">2</div>
-            <div>3</div>
-            <div>4</div>
-            <div><i class="fas fa-long-arrow-alt-right"></i></div>
-        </nav>
+        <nav class="board-pagnation"></nav>
     </div>
     <div class="board-add-container">
         <form id="board-form">
